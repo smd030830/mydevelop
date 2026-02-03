@@ -1,5 +1,6 @@
-import com.google.gson.Gson;
+package com.mjc813;
 
+import com.google.gson.Gson;
 import java.lang.reflect.Type;
 
 public class TransJson {

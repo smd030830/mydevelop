@@ -1,3 +1,5 @@
+package com.mjc813;
+
 import lombok.*;
 
 @Getter
