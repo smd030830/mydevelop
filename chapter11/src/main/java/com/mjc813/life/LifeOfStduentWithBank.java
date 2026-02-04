@@ -1,11 +1,18 @@
 package com.mjc813.life;
 
 import com.mjc813.banking.BankAccount;
+import com.mjc813.banking.IMachine;
 import com.mjc813.banking.MachineNotWorkingException;
 import com.mjc813.banking.SendMachine;
 import com.mjc813.student.Student;
 
 public class LifeOfStduentWithBank {
+    private final IMachine machine;
+
+    public LifeOfStduentWithBank(IMachine machine) {
+        this.machine = machine;
+    }
+
     public void doToday() throws MachineNotWorkingException {
         Student lsh = new Student("이승협", "lsh2928");
         Student cwc = new Student("최원철", "csc9292");
@@ -20,19 +27,21 @@ public class LifeOfStduentWithBank {
         this.sendMoney(cwcBank, lshBank, 5000);
     }
 
-    public void sendMoney(StudentHasBankAccount from, StudentHasBankAccount to, int money) throws MachineNotWorkingException {
-        // 원하는 곳에 예외처리 하세요
-        SendMachine sm = new SendMachine();
+    public void sendMoney(StudentHasBankAccount from, StudentHasBankAccount to, int money) {
         // from 뱅크에서 money 를 빼낸다.
         from.outcome(money);
-        System.out.println(from.getBankAccount());
         // 과제
-        if (!sm.isActive()) {
-            throw new MachineNotWorkingException("송금 기계가 작동하지 않습니다.");
+        try {
+            if (this.machine.isActive()) {
+                // to 뱅크로 money 를 추가한다.
+                to.income(money);
+                // 과제
+            } else {
+                from.income(money);
+            }
+        } catch (MachineNotWorkingException me) {
+            System.err.println(me.getMessage());
+            from.income(money);
         }
-        // to 뱅크로 money 를 추가한다.
-        to.income(money);
-        System.out.println(to.getCurrentMoney());
-        // 과제
     }
 }
