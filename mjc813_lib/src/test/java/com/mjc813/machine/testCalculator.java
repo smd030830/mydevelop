@@ -13,4 +13,3 @@ public class testCalculator {
         assertThat(cal.add(-33,-77,-909)).isEqualTo(-1019L);
     }
 }
-
