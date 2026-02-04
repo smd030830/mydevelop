@@ -24,17 +24,14 @@ public class LifeOfStduentWithBank {
         // 원하는 곳에 예외처리 하세요
         SendMachine sm = new SendMachine();
         // from 뱅크에서 money 를 빼낸다.
-        int frommoney = from.getCurrentMoney();
-
+        from.outcome(money);
+        System.out.println(from.getBankAccount());
         // 과제
         if (!sm.isActive()) {
             throw new MachineNotWorkingException("송금 기계가 작동하지 않습니다.");
         }
-        from.getBankAccount().setMoney(frommoney - money);
-        System.out.println(from.getBankAccount());
         // to 뱅크로 money 를 추가한다.
-        int tomoney = to.getCurrentMoney();
-        to.getBankAccount().setMoney(tomoney + money);
+        to.income(money);
         System.out.println(to.getCurrentMoney());
         // 과제
     }
