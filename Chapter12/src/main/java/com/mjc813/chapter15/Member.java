@@ -1,4 +1,4 @@
-package com.mjc813;
+package com.mjc813.chapter15;
 
 public class Member {
     public String name;
