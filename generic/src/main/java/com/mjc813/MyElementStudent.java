@@ -1,4 +1,4 @@
-package com.mjc813.packaging;
+package com.mjc813;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,8 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @ToString
-public class Human {
+public class MyElementStudent {
 	private String name;
 	private int age;
+	private String nameCard;
 }

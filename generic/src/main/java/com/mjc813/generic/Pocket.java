@@ -1,15 +1,14 @@
-package com.mjc813.packaging;
+package com.mjc813.generic;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @ToString
-public class Human {
+public class Pocket<MT extends Number> {
 	private String name;
-	private int age;
+	private Currency currency;
+	private MT money;
 }
