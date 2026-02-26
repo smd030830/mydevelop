@@ -1,51 +1,53 @@
 package com.mjc813.crud;
 
-import java.util.LinkedList;
+import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CrudClass<A> implements CRUD<A>{
-	private List<A> list = new LinkedList<>();
+public class CrudClass<A> implements CRUD<A> {
+    private final List<A> list = new ArrayList<>();
+    private final Gson gson = new Gson();
 
-	@Override
-	public void add(A item) {
-		this.list.add(item);
-	}
+    @Override
+    public void add(A item) {
+        list.add(item);
+    }
 
-	@Override
-	public int size() {
-		return this.list.size();
-	}
+    @Override
+    public int size() {
+        return list.size();
+    }
 
-	@Override
-	public A set(int index, A item) {
-		return this.list.set(index, item);
-	}
+    @Override
+    public A set(int index, A item) {
+            list.set(index, item);
+            return item;
+    }
 
-	@Override
-	public A remove(int index) {
-		return null;
-	}
+    @Override
+    public A remove(int index) {
+        if (index >= 0 && index < list.size()) {
+            return list.remove(index);
+        }
+        return null;
+    }
 
-	@Override
-	public A get(int index) {
-		return this.list.get(index);
-	}
+    @Override
+    public A get(int index) {
+        if (index >= 0 && index < list.size()) {
+            return list.get(index);
+        }
+        return null;
+    }
 
-	@Override
-	public String getJson(int index) {
-		return "";
-	}
+    @Override
+    public String getJson(int index) {
+        A item = get(index);
+        return (item != null) ? gson.toJson(item) : "null";
+    }
 
-	@Override
-	public String getJsonAllItems() {
-		return "";
-	}
-
-	public void testA( CRUD<? extends NintendoGame> crudObj ) {
-
-	}
-
-	public void testMain() {
-		this.testA(new CrudClass<Nintendo2Game>());
-	}
+    @Override
+    public String getJsonAllItems() {
+        return gson.toJson(list);
+    }
 }

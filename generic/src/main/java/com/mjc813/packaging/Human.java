@@ -7,9 +7,9 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
+@AllArgsConstructor
 public class Human {
-	private String name;
-	private int age;
+    private String name;
+    private int age;
 }
