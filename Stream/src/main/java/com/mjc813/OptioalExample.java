@@ -42,10 +42,5 @@ public class OptioalExample {
                 )
         );
         System.out.println(map);
-
-
-
-
-
     }
 }
