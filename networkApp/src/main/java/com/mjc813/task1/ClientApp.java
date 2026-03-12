@@ -1,4 +1,4 @@
-package com.mjc813;
+package com.mjc813.task1;
 
 import java.io.*;
 import java.net.InetSocketAddress;

@@ -1,9 +1,8 @@
-package com.mjc813;
+package com.mjc813.task1;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 // 서버소켓 생성(ip대역 option, 포트번호 필수)
 // 클라이언트 접속 기다리는 동작(블로킹)
