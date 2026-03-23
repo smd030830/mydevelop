@@ -95,9 +95,9 @@ class NintendoGame {
       return false;
     }
     if (
-      $("#price").val().length < 1 ||
-      $("#price").val() * 1 <= 0 ||
-      $("#price").val() * 1 > 999999
+        $("#price").val().length < 1 ||
+        $("#price").val() * 1 <= 0 ||
+        $("#price").val() * 1 > 999999
     ) {
       alert("가격은 1~999999원 까지 입력 가능 합니다.");
       $("#price").focus();
@@ -130,10 +130,41 @@ class NintendoGame {
       , imgUrl: $("#imgUrl").val()
     };
     // gameList 배열에 JS객체 를 추가한다. this.#gameList.push(JS객체);
-    this.#gameList.push(newGame);
-    this.clearInputBox();
+//    this.#gameList.push(newGame);
+    this.insertData(newGame);
+//    this.clearInputBox();
     // gameList 배열정보를 게임목록 화면에 출력한다. this.printList();
     this.printList();
+  }
+
+  insertData(insertData) {
+    // 1. 화면에서는 JSON 데이터를 서버 URL 과 Method POST 로 전송하는 Jquery AJAX 를 구현해야 한다.
+    // 2. 웹서버에서는 서버 URL 와 Method POST 와 JSON 데이터를 받아들이는 컨트롤러를 구현해야 한다.
+    // 3. 웹서버 컨트롤러는 DataBase Service 에 inset 하는 동작을 실행해야 한다.
+    // 4. Data Service 는 insert 하는 mybatis insert 메소드를 실행해야 한다.
+    // 5. mybatis insert 메소드는 SQL INSERT query 를 데이터베이스연결한 컨넥션풀에서 실행해야 한다.
+    // 6. 실행할 결과를 역순으로 화면까지 리턴해야 한다.
+    $.ajax({
+      url: "/api/insert-data" // 요청 URL
+      , type: "POST"          // 전송 방식 (GET, POST 등)
+      , dataType: "json"      // 응답 데이터 타입
+      , data: JSON.stringify(insertData)
+      , contentType: "application/json"
+    })
+        .done(function(data, textStatus, jqXHR) {
+          // 요청 성공 시 실행
+          console.log("성공:", data);
+//	    $("#result").text(data.message);
+          this.clearInputBox();
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+          // 요청 실패 시 실행
+          console.error("실패:", textStatus);
+        })
+        .always(function() {
+          // 성공/실패 관계없이 항상 실행
+//	    console.log("요청 완료");
+        });
   }
 
   updateGame() {
