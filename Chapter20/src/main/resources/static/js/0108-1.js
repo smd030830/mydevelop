@@ -59,7 +59,7 @@ class NintendoGame {
     $("#genre").val("A");
     $("#grade").val("ALL");
     $("#price").val(0);
-    $("#imgUrl").val("");
+    $("#img_url").val("");
   }
 
   setData2InputBox(game) {
@@ -70,8 +70,8 @@ class NintendoGame {
     $("#genre").val(game.genre);
     $("#grade").val(game.grade);
     $("#price").val(game.price);
-    $("#imgUrl").val(game.imgUrl);
-    $("#showImage").attr("src", game.imgUrl);
+    $("#img_url").val(game.img_url);
+    $("#showImage").attr("src", game.img_url);
   }
 
   checkInputData(mode) {
@@ -103,9 +103,9 @@ class NintendoGame {
       $("#price").focus();
       return false;
     }
-    if ($("#imgUrl").val().indexOf("http") !== 0) {
+    if ($("#img_url").val().indexOf("http") !== 0) {
       alert("그림이미지는 http 로 시작해야 합니다.");
-      $("#imgUrl").focus();
+      $("#img_url").focus();
       return false;
     }
     return true;
@@ -127,7 +127,7 @@ class NintendoGame {
       , genre: $("#genre").val()
       , grade: $("#grade").val()
       , price: $("#price").val() * 1
-      , imgUrl: $("#imgUrl").val()
+      , img_url: $("#img_url").val() // 키 이름을 img_url로 변경
     };
     // gameList 배열에 JS객체 를 추가한다. this.#gameList.push(JS객체);
 //    this.#gameList.push(newGame);

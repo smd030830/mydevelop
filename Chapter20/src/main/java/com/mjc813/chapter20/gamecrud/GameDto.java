@@ -13,5 +13,5 @@ public class GameDto {
     private String genre;
     private String grade;
     private Integer price;
-    private String imgUrl;
+    private String img_url;
 }
