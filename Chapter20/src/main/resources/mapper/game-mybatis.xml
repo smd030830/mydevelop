@@ -13,7 +13,17 @@
                , #{genre}
                , #{grade}
                , #{price}
-               , #{img_url})
+               , #{imgUrl})
     </insert>
+
+    <update id="updateData" parameterType="GameDto">
+        UPDATE game_tbl
+        SET name    = #{name}
+          , price   = #{price}
+          , genre   = #{genre}
+          , img_url = #{imgUrl}
+          , grade   = #{grade}
+        WHERE id = #{id}
+    </update>
 
 </mapper>
