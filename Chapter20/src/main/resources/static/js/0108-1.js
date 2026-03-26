@@ -216,10 +216,39 @@ class NintendoGame {
         if ( !this.checkInputData("delete") ) {
             return;
         }
+
         // gameList 배열에서 기존의 id 번호랑 같은 원소를 찾는다. let 찾는객체 = this.#gameList.find(() => {});
         // 찾는객체를 gameList 배열에서 삭제한다.
         // gameList 배열정보를 게임목록 화면에 출력한다. this.printList();
     }
+      this.deleteData($("#id").val());
+    //    this.deleteData({"id":$("#id").val()});
+      }
+
+      deleteData(id) {
+    //  deleteData(deleteGame) {
+      	$.ajax({
+      	    url: "/api/delete-data" // 요청 URL
+      	    , type: "DELETE"          // 전송 방식 (GET, POST 등)
+      	    , dataType: "json"      // 응답 데이터 타입
+      	    , data: JSON.stringify({"id":id})
+    //  	    , data: JSON.stringify(deleteGame)
+      	    , contentType: "application/json"
+      	})
+      	.done(function(data, textStatus, jqXHR) {
+      	    // 요청 성공 시 실행
+      	    alert("성공:", data);
+      //	    $("#result").text(data.message);
+            clearInputBox();
+      	})
+      	.fail(function(jqXHR, textStatus, errorThrown) {
+      	    // 요청 실패 시 실행
+      	    alert("실패:", textStatus);
+      	})
+      	.always(function() {
+      	    // 성공/실패 관계없이 항상 실행
+      //	    console.log("요청 완료");
+      	});
 
     printOneGame(e) {
         // 화면의 id 값으로 gameList배열에서 찾는다. let id값 = $("#id").val();, let 찾은원소 = this.#gameList.find(() => {});
