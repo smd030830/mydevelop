@@ -17,6 +17,6 @@ server:
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.mjc813.chapter20
+  type-aliases-package: com.mjc813.chapter20.gamecrud  # 실제 클래스가 있는 패키지로 수정
   configuration:
     map-underscore-to-camel-case: true

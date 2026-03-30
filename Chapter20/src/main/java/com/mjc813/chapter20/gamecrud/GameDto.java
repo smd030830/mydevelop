@@ -4,9 +4,9 @@ import lombok.*;
 
 @Getter
 @Setter
-@ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class GameDto {
     private Integer id;
     private String name;
