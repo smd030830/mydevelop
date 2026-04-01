@@ -31,6 +31,6 @@ public class PetEntity {
 	@Column
 	private LocalDate birth;
 
-	@Column(length = 500, nullable = true)
+	@Column(name ="img_file",length = 500, nullable = true)
 	private String imgFile;
 }
