@@ -14,4 +14,9 @@ public class PetController {
 		model.addAttribute("curTime", LocalDateTime.now().toString());
 		return "home";
 	}
+
+	@RequestMapping("/pet")
+	public String pet(Model model) {
+		return "/pet/index";
+	}
 }

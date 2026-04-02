@@ -71,7 +71,7 @@
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "http://localhost:8084/api/pet?id=1",
+          "raw": "http://localhost:8084/api/pet?id=6",
           "protocol": "http",
           "host": [
             "localhost"
@@ -84,8 +84,29 @@
           "query": [
             {
               "key": "id",
-              "value": "1"
+              "value": "6"
             }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "findById",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8084/api/pet/45",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8084",
+          "path": [
+            "api",
+            "pet",
+            "45"
           ]
         }
       },

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>PET SHOP</title>
+</head>
+<body>
+	<h1> A 팀의 펫 관리 입니다. </h1>
+	<section>
+		<fieldset>
+			<label for="id">ID</label><input type="text" id="id">
+			<label for="name">펫이름</label><input type="text" id="name">
+			<label for="species">펫종류</label><input type="text" id="species">
+			<label for="breed">펫종</label><input type="text" id="breed">
+			<label for="gender">성별</label><input type="text" id="gender">
+			<label for="birth">생일</label><input type="text" id="birth">
+			<label for="imgFile">사진</label><input type="text" id="imgFile">
+		</fieldset>
+		<div>
+			<button onclick="$.addPet()">추가</button>
+			<button onclick="$.updatePet()">수정</button>
+			<button onclick="$.deletePet()">삭제</button>
+		</div>
+	</section>
+	<section>
+		<div>
+			<fieldset>
+				<label for="searchName">검색이름</label><input type="text" id="searchName">
+				<button>검색</button>
+			</fieldset>
+		</div>
+	</section>
+	<section id="list">
+		<div>
+			<span>강아지1</span>
+			<span>말티즈</span>
+			<span>강아지</span>
+			<span>M</span>
+			<span>2021-01-01</span>
+			<span>사진임시장소</span>
+		</div>
+	</section>
+	<div style="align: center">
+		<button onclick="$.searchList()">더보기</button>
+	</div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script>
+let curPage = -1;
+$(() => {
+  $.searchList = () => {
+	let searchName = $("#searchName").val();
+	curPage++;
+	$.ajax({
+	    url: `/api/pet/search?searchName=${searchName}&sort=id,desc&size=5&page=${curPage}` // 요청 URL
+	    , type: "GET"          // 전송 방식 (GET, POST 등)
+	})
+	.done(function(data, textStatus, jqXHR) {
+//	    alert("성공:", data);
+	    $.printList(data.data.content);
+	})
+	.fail(function(jqXHR, textStatus, errorThrown) {
+	    alert("실패:", textStatus);
+	})
+	.always(function() {
+	    // 성공/실패 관계없이 항상 실행
+	});
+  }
+
+  $.printList = (list) => {
+    list.forEach((item) => {
+        $("#list").append( $.makeHtmlOne(item) );
+    });
+  }
+
+  $.makeHtmlOne = (one) => {
+    return `<div onclick="$.showPet(${one.id})">
+<span>${one.name}</span>
+<span>${one.species}</span>
+<span>${one.breed}</span>
+<span>${one.gender}</span>
+<span>${one.birth}</span>
+<span>${one.imgFile}</span>
+</div>`
+  }
+
+  $.showPet = (id) => {
+  	$.ajax({
+  	    url: "/api/pet/" + id // 요청 URL
+  	    , type: "GET"          // 전송 방식 (GET, POST 등)
+  	})
+  	.done(function(data, textStatus, jqXHR) {
+  	    $.printItem(data.data);
+  	})
+  	.fail(function(jqXHR, textStatus, errorThrown) {
+  	    alert("실패:", textStatus);
+  	})
+  	.always(function() {
+  	});
+  }
+
+  $.printItem = (item) => {
+    $("#id").val(item.id);
+    $("#name").val(item.name);
+    $("#breed").val(item.breed);
+    $("#gender").val(item.gender);
+    $("#species").val(item.species);
+    $("#birth").val(item.birth);
+    $("#imgFile").val(item.imgFile);
+  }
+
+  $.getItem = () => {
+    let item = {
+	    "id" : $("#id").val()
+	    , "name" : $("#name").val()
+	    , "breed" : $("#breed").val()
+	    , "gender" : $("#gender").val()
+	    , "species" : $("#species").val()
+	    , "birth" : $("#birth").val()
+	    , "imgFile" : $("#imgFile").val()
+    }
+    return item;
+  }
+
+  $.addPet = () => {
+  }
+
+  $.updatePet = () => {
+  }
+
+  $.deletePet = () => {
+  }
+});
+</script>
+</html>
