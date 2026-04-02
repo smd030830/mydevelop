@@ -84,7 +84,7 @@ $(() => {
 </div>`
   }
 
-  $.showPet = (id) => {
+  $.showPet = (id) => {\
   	$.ajax({
   	    url: "/api/pet/" + id // 요청 URL
   	    , type: "GET"          // 전송 방식 (GET, POST 등)
@@ -123,12 +123,65 @@ $(() => {
   }
 
   $.addPet = () => {
+  let item = $.getItem();
+
+    $.ajax({
+        url: "/api/pet",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(item)
+    })
+    .done(function(data, textStatus, jqXHR) {
+        alert("성공적으로 추가되었습니다.");
+        // 필요 시 화면 초기화 및 재검색 함수 호출
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        alert("추가 실패: " + textStatus);
+    });
   }
 
   $.updatePet = () => {
+  let item = $.getItem();
+
+    if (!item.id) {
+        alert("수정할 펫을 먼저 선택해주세요.");
+        return;
+    }
+
+    $.ajax({
+        url: "/api/pet/" + item.id,
+        type: "PUT",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(item)
+    })
+    .done(function(data, textStatus, jqXHR) {
+        alert("성공적으로 수정되었습니다.");
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        alert("수정 실패: " + textStatus);
+    });
   }
 
   $.deletePet = () => {
+  let id = $("#id").val();
+
+    if (!id) {
+        alert("삭제할 펫을 먼저 선택해주세요.");
+        return;
+    }
+
+    $.ajax({
+        url: "/api/pet/" + id,
+        type: "DELETE"
+    })
+    .done(function(data, textStatus, jqXHR) {
+        alert("성공적으로 삭제되었습니다.");
+        // 삭제 후 입력 폼 초기화
+        $("#id, #name, #breed, #gender, #species, #birth, #imgFile").val("");
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        alert("삭제 실패: " + textStatus);
+    });
   }
 });
 </script>
