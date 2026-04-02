@@ -44,7 +44,7 @@ public class PetRestController {
 	 * 	, "birth": "2026-01-01"
 	 * 	, "imgFile": ""
 	 * }'
-	 * 
+	 *
 	 * @param petDto
 	 * @return
 	 */
@@ -57,10 +57,21 @@ public class PetRestController {
 			return ResponseEntity.status(500).body(new PetResponseDto(-999, "ERROR", null));
 		}
 	}
+
 	@PatchMapping
 	public ResponseEntity<PetResponseDto> updatePet(@RequestBody PetDto petDto) {
 		try {
 			PetDto result = this.petService.update(petDto);
+			return ResponseEntity.ok().body(new PetResponseDto(0, "SUCCESS", result));
+		} catch (Exception e) {
+			return ResponseEntity.status(500).body(new PetResponseDto(-999, "ERROR", null));
+		}
+	}
+
+	@DeleteMapping
+	public ResponseEntity<PetResponseDto> deletePet(@RequestParam Integer id) {
+		try {
+			PetDto result = this.petService.deleteById(id);
 			return ResponseEntity.ok().body(new PetResponseDto(0, "SUCCESS", result));
 		} catch (Exception e) {
 			return ResponseEntity.status(500).body(new PetResponseDto(-999, "ERROR", null));
