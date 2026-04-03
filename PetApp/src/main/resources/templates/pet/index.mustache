@@ -8,7 +8,7 @@
 	<h1> A 팀의 펫 관리 입니다. </h1>
 	<section>
 		<fieldset>
-			<label for="id">ID</label><input type="text" id="id">
+			<label for="id">ID</label><input type="text" id="id" readonly>
 			<label for="name">펫이름</label><input type="text" id="name">
 			<label for="species">펫종류</label><input type="text" id="species">
 			<label for="breed">펫종</label><input type="text" id="breed">
@@ -26,19 +26,11 @@
 		<div>
 			<fieldset>
 				<label for="searchName">검색이름</label><input type="text" id="searchName">
-				<button>검색</button>
+				<button onclick="$.searchListFirst()">검색</button>
 			</fieldset>
 		</div>
 	</section>
 	<section id="list">
-		<div>
-			<span>강아지1</span>
-			<span>말티즈</span>
-			<span>강아지</span>
-			<span>M</span>
-			<span>2021-01-01</span>
-			<span>사진임시장소</span>
-		</div>
 	</section>
 	<div style="align: center">
 		<button onclick="$.searchList()">더보기</button>
@@ -48,9 +40,17 @@
 <script>
 let curPage = -1;
 $(() => {
+	$.searchListFirst = function() {
+		// 검색버튼은 기존 목록을 지우고 첫페이지부터 보여줘야 한다.
+		$("#list").empty();
+		curPage = -1;
+		$.searchList();
+	};
+
   $.searchList = () => {
+	curPage++;  // 더보기로 검색한 결과 이후 페이지 데이터를 가져와서 보여준다.
+	// curPage 가 -1 이면 0이 되면서 첫페이지부터 시작
 	let searchName = $("#searchName").val();
-	curPage++;
 	$.ajax({
 	    url: `/api/pet/search?searchName=${searchName}&sort=id,desc&size=5&page=${curPage}` // 요청 URL
 	    , type: "GET"          // 전송 방식 (GET, POST 등)
@@ -84,7 +84,7 @@ $(() => {
 </div>`
   }
 
-  $.showPet = (id) => {\
+  $.showPet = (id) => {
   	$.ajax({
   	    url: "/api/pet/" + id // 요청 URL
   	    , type: "GET"          // 전송 방식 (GET, POST 등)
@@ -123,65 +123,61 @@ $(() => {
   }
 
   $.addPet = () => {
-  let item = $.getItem();
-
-    $.ajax({
-        url: "/api/pet",
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(item)
-    })
-    .done(function(data, textStatus, jqXHR) {
-        alert("성공적으로 추가되었습니다.");
-        // 필요 시 화면 초기화 및 재검색 함수 호출
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("추가 실패: " + textStatus);
-    });
+    let newPet = $.getItem();
+    newPet.id = null;
+  	$.ajax({
+  	    url: "/api/pet"
+  	    , type: "POST"
+	    , dataType: "json"
+	    , data: JSON.stringify(newPet)
+	    , contentType: "application/json"
+  	})
+  	.done(function(data, textStatus, jqXHR) {
+  	    $.printItem({"id":"", "name":"", "breed":"", "gender":"", "birth":"", "species":"", "imgUrl":""});
+  	    $.searchListFirst();
+  	})
+  	.fail(function(jqXHR, textStatus, errorThrown) {
+  	    alert("실패:", textStatus);
+  	})
+  	.always(function() {
+  	});
   }
 
   $.updatePet = () => {
-  let item = $.getItem();
-
-    if (!item.id) {
-        alert("수정할 펫을 먼저 선택해주세요.");
-        return;
-    }
-
-    $.ajax({
-        url: "/api/pet/" + item.id,
-        type: "PUT",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(item)
-    })
-    .done(function(data, textStatus, jqXHR) {
-        alert("성공적으로 수정되었습니다.");
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("수정 실패: " + textStatus);
-    });
+    let updatePet = $.getItem();
+  	$.ajax({
+  	    url: "/api/pet"
+  	    , type: "PATCH"
+	    , dataType: "json"
+	    , data: JSON.stringify(updatePet)
+	    , contentType: "application/json"
+  	})
+  	.done(function(data, textStatus, jqXHR) {
+  	    $.printItem({"id":"", "name":"", "breed":"", "gender":"", "birth":"", "species":"", "imgUrl":""});
+  	    $.searchListFirst();
+  	})
+  	.fail(function(jqXHR, textStatus, errorThrown) {
+  	    alert("실패:", textStatus);
+  	})
+  	.always(function() {
+  	});
   }
 
   $.deletePet = () => {
-  let id = $("#id").val();
-
-    if (!id) {
-        alert("삭제할 펫을 먼저 선택해주세요.");
-        return;
-    }
-
-    $.ajax({
-        url: "/api/pet/" + id,
-        type: "DELETE"
-    })
-    .done(function(data, textStatus, jqXHR) {
-        alert("성공적으로 삭제되었습니다.");
-        // 삭제 후 입력 폼 초기화
-        $("#id, #name, #breed, #gender, #species, #birth, #imgFile").val("");
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("삭제 실패: " + textStatus);
-    });
+    let id = $("#id").val();
+  	$.ajax({
+  	    url: "/api/pet?id=" + id
+  	    , type: "DELETE"
+  	})
+  	.done(function(data, textStatus, jqXHR) {
+  	    $.printItem({"id":"", "name":"", "breed":"", "gender":"", "birth":"", "species":"", "imgUrl":""});
+  	    $.searchListFirst();
+  	})
+  	.fail(function(jqXHR, textStatus, errorThrown) {
+  	    alert("실패:", textStatus);
+  	})
+  	.always(function() {
+  	});
   }
 });
 </script>

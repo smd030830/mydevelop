@@ -107,7 +107,7 @@ public class PetRestController {
 
 	@GetMapping("/search")
 	public ResponseEntity<PetResponseDto> findByNameContains(
-			@RequestParam String searchName
+			@RequestParam(name="searchName", defaultValue = "") String searchName
 			, @PageableDefault(size=5, sort="id", direction = Sort.Direction.DESC) Pageable pageable)
 			// 웹클라이언트에서 GET주소 요청시에 Pageable 정보를 이런식으로 전달할 수 있다. &sort=id,desc&size=4&page=0
 	{
