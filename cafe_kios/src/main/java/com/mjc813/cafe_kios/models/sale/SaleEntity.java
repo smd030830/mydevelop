@@ -1,6 +1,6 @@
 package com.mjc813.cafe_kios.models.sale;
 
-import com.mjc813.cafe_kios.models.product.ProductEntity;
+import com.mjc813.cafe_kios.models.product.ProductAEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +20,7 @@ public class SaleEntity implements ISale {
 
 	@JoinColumn(name="product_id", nullable = false)
 	@ManyToOne(fetch = FetchType.EAGER)
-	private ProductEntity productId;
+	private ProductAEntity productId;
 
 	@Column(nullable = false)
 	private Integer qty;

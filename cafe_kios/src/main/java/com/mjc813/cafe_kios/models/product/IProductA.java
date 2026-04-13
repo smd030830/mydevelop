@@ -2,7 +2,7 @@ package com.mjc813.cafe_kios.models.product;
 
 import com.mjc813.cafe_kios.models.category.ICategory;
 
-public interface IProduct {
+public interface IProductA {
 	Integer getId();
 	void setId(Integer id);
 
@@ -12,13 +12,16 @@ public interface IProduct {
 	Integer getPrice();
 	void setPrice(Integer price);
 
-	ICategory getCategory();
-	void setCategory(ICategory category);
+	Integer getCategoryId();
+	void setCategoryId(Integer categoryId);
+
+	ICategory getCategoryObj();
+	void setCategoryObj(ICategory categoryObj);
 
 	String getPicture();
 	void setPicture(String picture);
 
-	default IProduct copyMembers(IProduct src) {
+	default IProductA copyMembers(IProductA src) {
 		if ( src != null ) {
 			if ( src.getId() != null ) {
 				this.setId(src.getId());
@@ -29,8 +32,11 @@ public interface IProduct {
 			if ( src.getPrice() != null ) {
 				this.setPrice(src.getPrice());
 			}
-			if ( src.getCategory() != null) {
-				this.getCategory().copyMembers(src.getCategory());
+			if ( src.getCategoryId() != null ) {
+				this.setCategoryId(src.getCategoryId());
+			}
+			if ( src.getCategoryObj() != null) {
+				this.getCategoryObj().copyMembers(src.getCategoryObj());
 			}
 			if ( src.getPicture() != null ) {
 				this.setPicture(src.getPicture());
