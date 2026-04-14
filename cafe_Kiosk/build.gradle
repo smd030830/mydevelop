@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.mjc813'
 version = '0.0.1-SNAPSHOT'
-description = 'cafe_Kiosk'
+description = 'cafe_kiosk'
 
 java {
     toolchain {
