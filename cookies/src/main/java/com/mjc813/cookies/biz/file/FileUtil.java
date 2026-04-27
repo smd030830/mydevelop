@@ -1,6 +1,8 @@
 package com.mjc813.cookies.biz.file;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -12,7 +14,11 @@ import java.nio.file.StandardCopyOption;
 import java.util.Random;
 
 @Slf4j
+@Component
 public class FileUtil {
+	@Value("${cookie.save-folder}")
+	private String uploadPath;
+
 	/**
 	 * 디렉토리가 존재하면 true 를 리턴한다.
 	 * @param dir 디렉존제 여부를 체크할 디렉토리 path 문자열
@@ -39,11 +45,7 @@ public class FileUtil {
 			return false;
 		}
 		Path path = Paths.get(dir);
-		if ( !Files.isDirectory(path) ) {
-			return false;
-		} else {
-			Files.createDirectories(path);
-		}
+		Files.createDirectories(path);
 		return true;
 	}
 
@@ -102,23 +104,29 @@ public class FileUtil {
 	 * 첨부파일을 path/dest 경로로 파일 복사를 한다. 결과는 복사된 바이트 수를 리턴한다.
 	 * @param src 첨부파일 객체인 MultipartFile
 	 * @param path 저장될 디렉토리
-	 * @param dest 저장될 파일명
+	 * @param destFileName 저장될 파일명
 	 * @return 저장된 바이트수
 	 * @throws IOException
 	 */
-	public boolean copyFile(MultipartFile src, String path, String dest) throws IOException {
-		if ( src == null || path == null || dest == null ) {
+	public boolean copyFile(MultipartFile src, String path, String destFileName) throws IOException {
+		if ( src == null || path == null || destFileName == null ) {
 			return false;
 		}
-		if ( !this.checkDirectory(path) ) {
-			this.makeRecursiveDirectory(path);
-		}
-		Path destPath = Paths.get(path + "/" + dest);
-		long lResult = Files.copy(src.getInputStream()
-				, destPath
-				, StandardCopyOption.REPLACE_EXISTING);
-		if ( lResult <= 0 ) {
-			return false;
+		try {
+			String fullPath = this.uploadPath + "/" + path;
+			if (!this.checkDirectory(fullPath)) {
+				this.makeRecursiveDirectory(fullPath);
+			}
+			Path destPath = Paths.get(fullPath + "/" + destFileName);
+			long lResult = Files.copy(src.getInputStream()
+					, destPath
+					, StandardCopyOption.REPLACE_EXISTING);
+			if (lResult <= 0) {
+				return false;
+			}
+		}  catch (IOException e) {
+			log.error(e.toString());
+			throw e;
 		}
 		return true;
 	}

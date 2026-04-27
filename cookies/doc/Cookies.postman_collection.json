@@ -1005,14 +1005,6 @@
           "response": []
         },
         {
-          "name": "attach_upload",
-          "request": {
-            "method": "GET",
-            "header": []
-          },
-          "response": []
-        },
-        {
           "name": "file upload",
           "request": {
             "method": "POST",
@@ -1030,13 +1022,13 @@
                 {
                   "key": "files",
                   "type": "file",
-                  "uuid": "1dccb86f-da78-464a-92b1-9de1124ff20d",
+                  "uuid": "b13b4d07-15d9-467a-a5ba-940de7c26221",
                   "src": "/D:/git/mjc813_8/this_is_java/cookies/doc/쿠키프로젝트_화면설계.pptx"
                 },
                 {
                   "key": "files",
                   "type": "file",
-                  "uuid": "439027eb-9703-4103-8f94-68e9f0c67c61",
+                  "uuid": "d7453b83-d4d4-4713-9ac3-e517bddf4de2",
                   "src": "/D:/git/mjc813_8/this_is_java/cookies/doc/Cookies.postman_collection.json"
                 }
               ]

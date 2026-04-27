@@ -5,7 +5,7 @@
 CREATE DATABASE cookies DEFAULT CHARACTER SET utf8mb4;
 CREATE USER 'cookies_user'@'%' IDENTIFIED BY 'cookies9876!';
 GRANT ALL PRIVILEGES ON cookies.* TO 'cookies_user'@'%';
-FLUSH PRIVILEGES
+FLUSH PRIVILEGES;
 ```
 
 ### 물리테이블 설계서

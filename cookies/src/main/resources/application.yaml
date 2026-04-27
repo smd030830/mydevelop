@@ -30,3 +30,6 @@ server:
       enabled: true
       force: true
 
+cookie:
+  save-folder: ./cookie_upload
+
