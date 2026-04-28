@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service    // 스프링부트가 이 클래스를 자동으로 Autowired, 객체로 생성할 수 있다.
 public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;

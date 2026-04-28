@@ -15,9 +15,9 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity(name = "cooking")
-@NamedEntityGraph(name="CookingEntity.fetchCookie", attributeNodes = {
-		@NamedAttributeNode(value="cookie")
-})
+//@NamedEntityGraph(name="CookingEntity.fetchCookie", attributeNodes = {
+//		@NamedAttributeNode(value="cookie")
+//})
 public class CookingEntity implements CookingInterface {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

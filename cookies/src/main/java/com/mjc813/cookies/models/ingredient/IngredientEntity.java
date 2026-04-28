@@ -23,11 +23,11 @@ public class IngredientEntity implements IngredientInterface {
 	@Column(length = 30, nullable = false, unique = true)
 	private String name;
 
-	@Transient
+	@Transient // JPA 에 테이블을 어떤 컬럼에도 연결 시키지 않는다.
 	private Long categoryId;
 
-	@JoinColumn(name = "category_id", nullable = false)
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id", nullable = false) // 외래키가 저장되는 컬럼이름, 마스터테이블 Entity
+	@ManyToOne(fetch = FetchType.EAGER)  // FetchType.LAZY = SELECT 여러문장을 실행, EAGER = JOIN 을 실행
 	private CategoryEntity category;
 
 	@Override

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CookingRepository extends JpaRepository<CookingEntity, Long> {
-	@EntityGraph(value = "CookingEntity.fetchCookie")
+	@EntityGraph(attributePaths = {"cookie"})
 	Slice<CookingEntity> findAllByDescriptionContaining(String description, Pageable pageable);
 
-	@EntityGraph(value = "CookingEntity.fetchCookie")
+	@EntityGraph(attributePaths = {"cookie"})
 	Slice<CookingEntity> findAllByCookieEquals(CookieEntity cookie, Pageable pageable);
 }
