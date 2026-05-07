@@ -11,9 +11,10 @@ public class CommonExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<CommonResponseDto<String>> exceptionHandler(Exception ex) {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-			new CommonResponseDto<String>(CommonResponseCode.SERVER_ERROR
-					, CommonResponseCode.SERVER_ERROR.getMessage()
-					, ex.getMessage())
+//			new CommonResponseDto<String>(CommonResponseCode.F0002
+//					, CommonResponseCode.F0002.getMessage()
+//					, ex.getMessage())
+			CommonResponseDto.make(CommonResponseCode.F0002, ex.getMessage())
 		);
 	}
 }

@@ -1,9 +1,9 @@
 package com.mjc813.swimpool.common;
 
 public enum CommonResponseCode {
-	OK("success"),
-	FAILED("request failed"),
-	SERVER_ERROR("server process error");
+	C0000("success"),
+	F0001("request failed"),
+	F0002("server process error");
 
 	private final String message;
 
