@@ -1,0 +1,32 @@
+#inputSection div {
+  display: grid;
+  grid-template-columns: 80px auto;
+  margin: 5px 0px;
+}
+.titleDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: antiquewhite;
+}
+.titleDiv > div {
+  margin: 1px 10px;
+  min-width: 40vh;
+}
+.ulList {
+  display: flex;
+  flex-direction: column;
+}
+.dataLi {
+  margin: 14px 0px;
+  background-color: lightblue;
+}
+.oneRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.oneRow > div {
+  margin: 1px 10px;
+  min-width: 40vh;
+  flex-direction: row;
+}
