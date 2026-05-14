@@ -6,7 +6,7 @@ spring:
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: none # update : Entity 의 멤버변수가 변하면 자동으로 데이터베이스의 테이블도 갱신해준다.
+      ddl-auto: validate # Entity 의 멤버변수가 변하면 자동으로 데이터베이스의 테이블도 갱신해준다.
 
 server:
-  port: 80
+  port: ${PORT}

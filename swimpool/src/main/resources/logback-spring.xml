@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <property name="LOG_PATH" value="./logs"/>
+    <property name="LOG_FILE_NAME" value="swimpool.log"/>
+    <property name="ERR_LOG_FILE_NAME" value="error-swimpool.log"/>
+    <property name="ROOT_LEVEL" value="${LOG_ROOT_LEVEL}"/>
+    <property name="JPA_LEVEL" value="${LOG_JPA_LEVEL}"/>
+
+    <appender name="Consol" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charest>UTF-8</charest>
+            <pattern>%d{yyyyMMdd HH:mm:ss:SSS} {%thread} %-3level</pattern>
+        </encoder>
+    </appender>
+
+</configuration>
