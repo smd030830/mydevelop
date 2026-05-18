@@ -29,14 +29,14 @@ services:
     #   context: .
     #   dockerfile: Dockerfile.prod
     container_name: "backend-container"
-    image: "backend-server:0.0.11"
+    image: "backend-server:0.0.15"
     restart: "always"
     ports:
       - "80:80"
     env_file:
       - .env.prod
     environment:
-      DB_IP: swimpool_mysql8
+      # DB_IP: swimpool_mysql8
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
       TZ: Asia/Seoul
     depends_on:

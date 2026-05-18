@@ -11,7 +11,7 @@ spring:
 #      ddl-auto: update # Entity 의 멤버변수가 변하면 자동으로 데이터베이스의 테이블도 갱신해준다.
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
@@ -30,10 +30,10 @@ server:
       enabled: true
       force: true
 
-logging:
-  level:
-    root: INFO                # 전체 기본 로깅 레벨 (기본값)
-    org.springframework.web: DEBUG  # 스프링 웹 관련 로그 상세화
-    com.mjc813.swimpool: DEBUG # 특정 패키지(내 프로젝트) 로그 상세화
+#logging:
+#  level:
+#    root: INFO                # 전체 기본 로깅 레벨 (기본값)
+#    org.springframework.web: DEBUG  # 스프링 웹 관련 로그 상세화
+#    com.mjc813.swimpool: DEBUG # 특정 패키지(내 프로젝트) 로그 상세화
 
 
