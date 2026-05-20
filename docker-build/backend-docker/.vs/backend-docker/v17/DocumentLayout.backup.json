@@ -34,7 +34,8 @@
               "RelativeToolTip": "Dockerfile.prod",
               "ViewState": "AgIAAAcAAAAAAAAAAAAswBYAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-05-18T10:59:21.666Z"
+              "WhenOpened": "2026-05-18T10:59:21.666Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -44,7 +45,7 @@
               "RelativeDocumentMoniker": "docker-compose.prod.yml",
               "ToolTip": "C:\\develop\\KDTgit\\codingtest\\mydevelop\\docker-build\\backend-docker\\docker-compose.prod.yml",
               "RelativeToolTip": "docker-compose.prod.yml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAqwCQAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAqwCwAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
               "WhenOpened": "2026-05-18T10:51:47.146Z",
               "EditorCaption": ""
@@ -59,7 +60,8 @@
               "RelativeToolTip": "init.sql",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-05-18T10:51:21.73Z"
+              "WhenOpened": "2026-05-18T10:51:21.73Z",
+              "EditorCaption": ""
             }
           ]
         }
